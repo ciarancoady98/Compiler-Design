@@ -5,10 +5,14 @@
 */
 %{
 
+
 %}
 
 %%
 
+^\*\*+.*\n         {printf("This is a comment");}
+\n              {printf("matched a new line");}
+.               {printf("matched random Character");}
 
 %%
 
