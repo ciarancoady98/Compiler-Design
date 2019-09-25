@@ -10,10 +10,11 @@
 
 %%
 
-^\*\*+.*\n        {printf("This is a ** full line comment");}
-\{{1}.*\}{1}\n    {printf("This is a { comment ");}
-\n                {printf("matched a new line");}
-.                 {printf("matched random Character");}
+^\*\*+.*\n            {printf("This is a ** full line comment");}
+\{{1}.*\}{1}\n        {printf("This is a { comment ");}
+\"(\\.|[^\\"])*\"\n   {printf("This is a string");}
+\n                    {printf("matched a new line");}
+.                     {printf("matched random Character");}
 
 %%
 
