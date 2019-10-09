@@ -21,7 +21,7 @@
   
 %}
 
-NUMBER [0-9]+
+NUMBER [0-9]{1,6}[ \t\n]+
 CURRENTCOUNTY C|CE|CN|CW|D|DL|G|KE|KK|KY|L|LD|LH|LM|LS|MH|MN|MO|OY|RN|SO|T|W|WH|WX|WW
 OLDCOUNTY C|CE|CN|CW|D|DL|G|KE|KK|KY|L|LK|LD|LH|LM|LS|MH|MN|MO|OY|RN|SO|TS|TN|W|WD|WH|WX|WW
 CURRENTYEAR [1][4-9][12]
@@ -30,9 +30,10 @@ OLDYEAR [0-9][0-9]
 
 %%
 
-({OLDYEAR}|{AWKWARDYEAR}){OLDCOUNTY}{NUMBER}    {printAge();} 
-{CURRENTYEAR}{CURRENTCOUNTY}{NUMBER}            {printAge();}
-.                                               {printf("%s", "INVALID\n");}
+({OLDYEAR}|{AWKWARDYEAR})-{OLDCOUNTY}-{NUMBER}        {printAge();} 
+{CURRENTYEAR}-{CURRENTCOUNTY}-{NUMBER}                {printAge();}
+.+[ \t\n]			                                        {printf("INVALID\n");}
+\n				                                            {}
 
 
 %%
