@@ -1,0 +1,4 @@
+#Compiled C files
+*.c
+#Executables
+*.out
