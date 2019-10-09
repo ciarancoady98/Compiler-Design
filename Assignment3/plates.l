@@ -4,6 +4,21 @@
     Student Number: 17326951
 */
 %{
+  int currentYear = 2019;
+
+  void printAge(){
+    char* text = yytext;
+    int firstDig = (int)text[0] - 48;
+    int secondDig = (int)text[1] - 48;
+    int yearInt = (firstDig*10)+secondDig; 
+    if(yearInt >= 87){
+      printf("%i\n", currentYear-(1900+yearInt));
+    }   
+    else {
+      printf("%i\n", currentYear-(2000+yearInt));
+    }
+  }
+  
 %}
 
 NUMBER [0-9]+
@@ -15,9 +30,9 @@ OLDYEAR [0-9][0-9]
 
 %%
 
-({OLDYEAR}|{AWKWARDYEAR}){OLDCOUNTY}{NUMBER}    {printf("%s%s", yytext ,"\n");} 
-{CURRENTYEAR}{CURRENTCOUNTY}{NUMBER}            {printf("%s%s", yytext, "\n");}
-.*                                              {printf("%s", "INVALID\n");}
+({OLDYEAR}|{AWKWARDYEAR}){OLDCOUNTY}{NUMBER}    {printAge();} 
+{CURRENTYEAR}{CURRENTCOUNTY}{NUMBER}            {printAge();}
+.                                               {printf("%s", "INVALID\n");}
 
 
 %%
