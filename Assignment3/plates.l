@@ -6,13 +6,15 @@
 %{
 %}
 
+NUMBER [0-9]
+COUNTY KK
+YEAR [1]?[0-9][0-9]
+
 %%
 
-\*\*(.*)        {;}
-\{[^}]*         {printf("%s", "syntax error\n"); return 0;}
-\}              {printf("%s", "syntax error\n"); return 0;}
-\{[^}]*\}       {;}
-\"[^"]*\"       {printf("%s", yytext);}
+{YEAR}          {printf("%s", "you have found a magical year");}
+{COUNTY}        {printf("%s", "youre from kilkenny mate");}
+{NUMBER}        {printf("%s", "just a boring old number im afraid");}
 .               {printf("%s", yytext);}
 
 
