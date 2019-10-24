@@ -17,7 +17,7 @@ int previous;
 %%
 
 decimal: /* nothing */
- | decimal numtodec EOL { printf("= %d\n> ", $2); }
+ | decimal numtodec EOL { printf("%d\n", $2); }
  ; 
 
 numtodec: numtodec numeral {if(previous < $2){
