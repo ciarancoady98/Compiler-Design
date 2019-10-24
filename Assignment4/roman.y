@@ -39,6 +39,8 @@ numeral: I {$$ = $1;}
         |D {$$ = $1;}
         |M {$$ = $1;}
 
+error
+
 %%
 int main()
 {
@@ -49,6 +51,7 @@ int main()
 void yyerror(char *s)
 {
   fprintf(stderr, "%s\n", s);
+  exit(0);
 }
 
 
