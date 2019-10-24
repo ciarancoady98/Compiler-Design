@@ -17,7 +17,7 @@ void yyerror(char *s);
 "D"     {yylval = 500;return D;}
 "M"     {yylval = 1000;return M;}
 \n      {return EOL;}
-.	    {yyerror("syntax error\n")return;}
+.	    {yyerror("syntax error\n");return;}
 
 %%
 /*
