@@ -39,8 +39,6 @@ numeral: I {$$ = $1;}
         |D {$$ = $1;}
         |M {$$ = $1;}
 
-error
-
 %%
 int main()
 {
