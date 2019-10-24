@@ -21,10 +21,3 @@ void yyerror(char *s);
 .	    {return ERROR;}
 
 %%
-/*
-int main()
-{
-  yylex();
-  return 0;
-}
-*/
