@@ -8,20 +8,24 @@
 #  include <stdlib.h>
 int yylex();
 void yyerror(char *s);
-int previous;
+int previous = 0;
+int prevSub = 0;
 %}
 
 /* declare tokens */
 %token I V X L C D M
-%token EOL
+%token EOL 
+%token ERROR
 %%
 
 decimal: /* nothing */
- | decimal numtodec EOL { printf("%d\n", $2); }
+ | decimal numtodec EOL { printf("%d\n", $2); previous = 0; prevSub = 0;}
  ; 
 
-numtodec: numtodec numeral {if(previous < $2){
+numtodec: numtodec numeral {if(prevSub == $2){yyerror("syntax error\n"); return 0;}
+                            if(previous < $2){
                                 $$ = ($1 + $2) - (previous * 2);
+                                prevSub = previous;
                                 previous = $2;
                             }
                             else {
@@ -38,6 +42,7 @@ numeral: I {$$ = $1;}
         |C {$$ = $1;}
         |D {$$ = $1;}
         |M {$$ = $1;}
+        |ERROR {yyerror("syntax error\n"); return 0;}
 
 %%
 int main()
@@ -48,7 +53,7 @@ int main()
 
 void yyerror(char *s)
 {
-  fprintf(stderr, "%s\n", s);
+  printf("%s", s);
   exit(0);
 }
 

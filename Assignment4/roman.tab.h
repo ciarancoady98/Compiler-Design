@@ -56,7 +56,8 @@ extern int yydebug;
     C = 262,
     D = 263,
     M = 264,
-    EOL = 265
+    EOL = 265,
+    ERROR = 266
   };
 #endif
 
