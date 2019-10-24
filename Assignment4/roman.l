@@ -16,6 +16,7 @@ void yyerror(char *s);
 "C"     {yylval = 100;return C;}
 "D"     {yylval = 500;return D;}
 "M"     {yylval = 1000;return M;}
+"CMCC"  {return ERROR;}
 \n      {return EOL;}
 .	    {return ERROR;}
 

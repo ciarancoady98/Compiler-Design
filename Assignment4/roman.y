@@ -9,7 +9,6 @@
 int yylex();
 void yyerror(char *s);
 int previous = 0;
-int prevSub = 0;
 %}
 
 /* declare tokens */
@@ -19,13 +18,12 @@ int prevSub = 0;
 %%
 
 decimal: /* nothing */
- | decimal numtodec EOL { printf("%d\n", $2); previous = 0; prevSub = 0;}
+ | decimal numtodec EOL { printf("%d\n", $2); previous = 0;}
  ; 
 
-numtodec: numtodec numeral {if(prevSub == $2){yyerror("syntax error\n"); return 0;}
+numtodec: numtodec numeral {
                             if(previous < $2){
                                 $$ = ($1 + $2) - (previous * 2);
-                                prevSub = previous;
                                 previous = $2;
                             }
                             else {
