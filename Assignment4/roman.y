@@ -42,7 +42,6 @@ numeral: I {$$ = $1;}
 %%
 int main()
 {
-  printf("> "); 
   yyparse();
   return 0;
 }
