@@ -1,5 +1,5 @@
 /*
-    Filename: roman.l
+    Filename: romcalc.l
     Name: Ciaran Coady
     Student Number: 17326951
 */
