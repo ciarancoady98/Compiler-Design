@@ -14,31 +14,43 @@ char outputString[100];
 char* numeralLookUpTable[] = {"I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M"};
 int decimalLookUpTable[] = {1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000};
 int lookUpTableSize = 13;
-void getNumeral(int number){
+void printNumeral(int number){
     int currentNumber = number;
-    while(currentNumber != 0 && currentNumber > 0){
-        int indexOfCurrentToken = 0;
-        for(int i = 0; i < lookUpTableSize; i++){
-            if(number >= decimalLookUpTable[i]){
-                indexOfCurrentToken = i;
-            }
-        }   
-        currentNumber = currentNumber - decimalLookUpTable[indexOfCurrentToken];
-        strcat(outputString, numeralLookUpTable[indexOfCurrentToken]);
+    if(currentNumber == 0){
+        printf("%s\n", "Z");
     }
-    printf(outputString);
+    else {
+        if(currentNumber < 0){
+            strcat(outputString, "-");
+            currentNumber = abs(currentNumber);
+        }
+        while(currentNumber != 0 && currentNumber > 0){
+            int indexOfCurrentToken = 0;
+            int i = 0;
+            for(i = 0; i < lookUpTableSize; i++){
+                if(currentNumber >= decimalLookUpTable[i]){
+                    indexOfCurrentToken = i;
+                }
+            }   
+            currentNumber = currentNumber - decimalLookUpTable[indexOfCurrentToken];
+            strcat(outputString, numeralLookUpTable[indexOfCurrentToken]);
+        }
+        printf("%s\n", outputString);
+        memset(outputString, 0, sizeof(outputString));
+    }
 }
 %}
 
 /* declare tokens */
 %token I V X L C D M
-%token PLUS MINUS MUL DIV
+%token PLUS MINUS MUL DIV OB CB
 %token EOL 
 %token ERROR
 %%
 
 decimal: /* nothing */
- | decimal expression EOL { printf("%d\n", $2); previous = 0;}
+ | decimal expression EOL { printNumeral($2);
+                            previous = 0;}
  ; 
 
  expression: factor 

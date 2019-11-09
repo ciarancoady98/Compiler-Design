@@ -60,8 +60,10 @@ extern int yydebug;
     MINUS = 266,
     MUL = 267,
     DIV = 268,
-    EOL = 269,
-    ERROR = 270
+    OB = 269,
+    CB = 270,
+    EOL = 271,
+    ERROR = 272
   };
 #endif
 

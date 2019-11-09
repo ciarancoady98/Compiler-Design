@@ -13,6 +13,8 @@ void yyerror(char *s);
 "-"     {return MINUS;}
 "/"     {return DIV;}
 "*"     {return MUL;}
+"{"     {return OB;}
+"}"     {return CB;}
 "I"     {yylval = 1;return I;}
 "V"     {yylval = 5;return V;}
 "X"     {yylval = 10;return X;}
