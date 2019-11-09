@@ -17,6 +17,7 @@ void yyerror(char *s);
 "}"     {return CB;}
 "I"     {yylval = 1;return I;}
 "V"     {yylval = 5;return V;}
+"VV"    {return ERROR;}
 "X"     {yylval = 10;return X;}
 "L"     {yylval = 50;return L;}
 "C"     {yylval = 100;return C;}

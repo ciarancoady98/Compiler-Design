@@ -73,6 +73,8 @@ numtodec: numtodec numeral {
                                 previous = $2;
                             }
                             }
+            | OB expression CB {$$ = $2;}
+            | OB expression {yyerror("syntax error\n");}
             | numeral {previous = $1;$$ = $1;}
 
 numeral: I {$$ = $1;}
