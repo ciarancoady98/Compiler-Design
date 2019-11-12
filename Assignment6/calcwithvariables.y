@@ -13,48 +13,28 @@ int variables[26];
 %}
 
 /* declare tokens */
-%token PLUS MINUS MUL DIV ASSIGNMENT SEMICOLON
-%token EOL 
-%token ERROR
+%token PLUS MINUS MUL DIV ASSIGNMENT SEMICOLON PRINT
+%token ERROR VARIABLE NUMBER
 %%
 
-decimal: /* nothing */
- | decimal expression EOL { printNumeral($2);
-                            previous = 0;}
- ; 
+input: 
+ | input VARIABLE ASSIGNMENT exp SEMICOLON {printf("%d", $4);}
+;
 
- expression: factor 
- | expression PLUS factor { $$ = $1 + $3; }
- | expression MINUS factor { $$ = $1 - $3; }
+exp: factor 
+ | exp PLUS factor { $$ = $1 + $3; }
+ | exp MINUS factor { $$ = $1 - $3; }
  ;
 
-factor: numtodec 
- | factor MUL numtodec { $$ = $1 * $3; }
- | factor DIV numtodec { $$ = $1 / $3; }
+factor: term
+ | factor MUL term { $$ = $1 * $3; }
+ | factor DIV term { $$ = $1 / $3; }
  ;
 
-numtodec: numtodec numeral {
-                            if(previous < $2){
-                                $$ = ($1 + $2) - (previous * 2);
-                                previous = $2;
-                            }
-                            else {
-                                $$ = $1 + $2;
-                                previous = $2;
-                            }
-                            }
-            | OB expression CB {$$ = $2;}
-            | OB expression {yyerror("syntax error\n");}
-            | numeral {previous = $1;$$ = $1;}
-
-numeral: I {$$ = $1;}
-        |V {$$ = $1;}
-        |X {$$ = $1;}
-        |L {$$ = $1;}
-        |C {$$ = $1;}
-        |D {$$ = $1;}
-        |M {$$ = $1;}
-        |ERROR {yyerror("syntax error\n"); return 0;}
+term: NUMBER
+ | VARIABLE {$$ = variables[($1)-49];}
+ | ERROR {yyerror("syntax error\n"); return 0;}
+ ;
 
 
 
