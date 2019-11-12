@@ -34,8 +34,8 @@ factor: term
  ;
 
 term: NUMBER
+ | MINUS NUMBER {$$ = ($2*-1);}
  | VARIABLE {$$ = variables[($1)-characterCodeOffset];}
- | ERROR {yyerror("syntax error"); return 0;}
  ;
 
 
