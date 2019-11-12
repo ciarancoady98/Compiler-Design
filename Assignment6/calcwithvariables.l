@@ -20,6 +20,6 @@ void yyerror(char *s);
 [0-9]+	{ yylval = atoi(yytext); return NUMBER; }
 \n      {}
 [ \t]   {}
-.	    {yyerror("syntax error");}
+.	    {yyerror("syntax error\n");}
 
 %%
