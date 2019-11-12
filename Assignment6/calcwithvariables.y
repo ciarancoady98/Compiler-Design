@@ -10,6 +10,7 @@
 int yylex();
 void yyerror(char *s);
 int variables[26];
+int characterCodeOffset = 49;
 %}
 
 /* declare tokens */
@@ -18,7 +19,8 @@ int variables[26];
 %%
 
 input: 
- | input VARIABLE ASSIGNMENT exp SEMICOLON {printf("%d", $4);}
+ | input VARIABLE ASSIGNMENT exp SEMICOLON {variables[$2-characterCodeOffset] = $4;}
+ | input PRINT VARIABLE SEMICOLON {printf("%d\n", variables[$3-characterCodeOffset]);}
 ;
 
 exp: factor 
@@ -32,7 +34,7 @@ factor: term
  ;
 
 term: NUMBER
- | VARIABLE {$$ = variables[($1)-49];}
+ | VARIABLE {$$ = variables[($1)-characterCodeOffset];}
  | ERROR {yyerror("syntax error\n"); return 0;}
  ;
 
