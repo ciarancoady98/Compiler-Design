@@ -35,7 +35,7 @@ factor: term
 
 term: NUMBER
  | VARIABLE {$$ = variables[($1)-characterCodeOffset];}
- | ERROR {yyerror("syntax error\n"); return 0;}
+ | ERROR {yyerror("syntax error"); return 0;}
  ;
 
 

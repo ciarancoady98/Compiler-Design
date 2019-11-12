@@ -13,12 +13,11 @@ void yyerror(char *s);
 "-"     {return MINUS;}
 "/"     {return DIV;}
 "*"     {return MUL;}
-":-"    {return ASSIGNMENT;}
+":="    {return ASSIGNMENT;}
 ";"     {return SEMICOLON;}
 "print" {return PRINT;}
 [a-z]{1} {yylval = yytext[0] - '0'; return VARIABLE;}
 [0-9]+	{ yylval = atoi(yytext); return NUMBER; }
-
 \n      {}
 [ \t]   {}
 .	    {return ERROR;}
